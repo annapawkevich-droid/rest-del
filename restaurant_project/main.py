@@ -7,7 +7,7 @@ from classes.delivery import Delivery
 from classes.payment import Payment
 from classes.review import Review
 
-# Промокоди
+#Промокоди
 PROMOCODES = {
     "SAVE10": 0.10,
     "SAVE20": 0.20,
@@ -17,13 +17,13 @@ PROMOCODES = {
 def main():
     print("👋 Ласкаво просимо до ресторану!")
 
-    # --- Дані клієнта ---
+    #Дані клієнта
     name = input("Введіть ваше ім'я: ")
     address = input("Введіть адресу доставки: ")
     phone = input("Введіть номер телефону: ")
     customer = Customer(name, address, phone)
 
-    # --- Меню ---
+    #Меню
     menu = Menu()
     menu.add_dish(Dish("Маргарита", 210.5, "Піца"))
     menu.add_dish(Dish("Чізбургер", 170.0, "Бургер"))
@@ -34,7 +34,7 @@ def main():
 
     menu.show_menu()
 
-    # --- Вибір страв ---
+    #Вибір страв
     while True:
         choice = input("\nОберіть номер страви (0 — завершити вибір): ")
         if choice == "0":
@@ -46,7 +46,7 @@ def main():
         else:
             print("❌ Невірний вибір!")
 
-    # --- Промокод ---
+    #Промокод
     promo = input("Якщо маєте промокод — введіть його (або залиште порожнім): ").upper()
     if promo in PROMOCODES:
         order.discount_rate = PROMOCODES[promo]
@@ -54,10 +54,10 @@ def main():
     elif promo:
         print("❌ Невірний промокод.")
 
-    # --- Підсумок ---
+    #Підсумок
     order.show_order()
 
-    # --- Оплата ---
+    #Оплата
     while True:
         pay_method = input("\nОберіть спосіб оплати (готівка / картка): ").strip().lower()
         payment = Payment(pay_method, order.total_price())
@@ -66,12 +66,12 @@ def main():
         else:
             print("🔁 Спробуйте ще раз обрати спосіб оплати.")
 
-    # --- Доставка ---
+    #Доставка
     courier = Employee("Іван Іванов", "Кур'єр", 18000, 4.8)
     delivery = Delivery(courier, order)
     delivery.show_info()
 
-    # --- Відгук ---
+    #Відгук
     comment = input("\nЗалиште короткий відгук: ")
     rating = int(input("Оцініть від 1 до 5: "))
     review = Review(customer, rating, comment)
